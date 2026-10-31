@@ -3,13 +3,11 @@
 We want to provide a way for users to navigate the Art Institute of Chicago's art catalogue with ease. We plan to make it possible for users to find an artwork they enjoy, and leave themselves notes for future reference.
 
 ## Features
-* Sorting
-* Browse
-* Favourites/saved
-  * Saving a work
-  * Removing a saved work
-* Notes on works
-* Filtering
+* Users will be able to sort/filter artworks by genre.
+* Users will be able to search by artwork and author names.
+* They will be able to browse through a catalogue
+* When a user finds a work they like, they will be able to save it to their favourites
+* After saving a work, they will be able to add private notes to the work for future reference.
 
 *Later List*
 * Custom collections
