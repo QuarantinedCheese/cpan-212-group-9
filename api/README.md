@@ -44,8 +44,10 @@ Many things have changed for favourites as did user, we had mistakenly left out 
 Current data model for favourites:
 * our ID
 * Chicago Institute's ID
+* user's ID
 * title
 * artist
+* notes
 
 This will likely be expanded in the future to accommodate more detailed information.
 ### Artwork
