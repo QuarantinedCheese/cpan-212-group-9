@@ -1,6 +1,6 @@
 # Art-Browser
 
 Group #9
-* Ethan - QuarantinedCheese
-* Kristine - kristinemayg-lgtm
-* Autumn - bloodleafpuddle
+* Ethan Pothier - QuarantinedCheese
+* Kristine May Garcia - kristinemayg-lgtm
+* Autumn Gun-Munro - bloodleafpuddle
