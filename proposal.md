@@ -1,6 +1,6 @@
 # Proposal
 
-We want to provide a way for users to navigate the Art Institute of Chicago's art catalogue with ease. We plan to make it possible for users to find an artwork they enjoy, and leave themselves notes for future reference.
+We want to provide a way for users to navigate the Art Institute of Chicago's art catalogue with ease. We plan to make it possible for users to find an artwork they enjoy, and leave themselves notes for future reference. This app will be for people who want to browse the AIC's art catalogue.
 
 ## Features
 * Users will be able to sort/filter artworks by genre.
