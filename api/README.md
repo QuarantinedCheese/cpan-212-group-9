@@ -49,10 +49,10 @@ Current data model for favourites:
 
 This will likely be expanded in the future to accommodate more detailed information.
 ### Artwork
-|Method| Path           |Success Code(s)| Error Code(s) |
-|------|----------------|---------------|---------------|
-|GET   |/api/artwork/   |200 OK         |400 Bad Request|
-|GET   |/api/artwork/:id|200 OK         |404 Not Found  | 
+|Method| Path           |Success Code(s)| Error Code(s)                  |
+|------|----------------|---------------|--------------------------------|
+|GET   |/api/artwork/   |200 OK         |400 Bad Request, 502 Bad Gateway|
+|GET   |/api/artwork/:id|200 OK         |404 Not Found, 502 Bad Gateway  | 
 
 Little has changed from the proposal for artoworks, main difference is path and GET with an id.
 
