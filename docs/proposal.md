@@ -47,6 +47,7 @@ Favourites: id, title, alt titles, date, artist, creation location, short descri
 <img width="500" height="500" alt="1000025260" src="https://github.com/user-attachments/assets/a10a9549-43fa-4df7-afe6-61772eb80fe0" />
 
 ## Team Roles
-* Front-End lead: Autumn  
-* API lead: Ethan  
-* Database lead: Kristine  
+* Repo/PR lead: Ethan Pothier
+* Front-End lead: Autumn Gun-Munro  
+* API lead: Ethan Pothier  
+* Database lead: Kristine May Garcia 
