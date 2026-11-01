@@ -1,14 +1,14 @@
 # API README
 
 ## API Setup
-To begin working with the API, you must first open the /api in an integrated terminal, and run the following commands: 
+To begin working with the API, you must first open the /api folder in an integrated terminal, and run the following commands: 
 * `npm install`
 * `cp .env.example .env`
 
 The first command ensures that all node modules are installed, and the second readies the environment variables.
 At the current moment, the only env variable is PORT, set to 4000 by default.
 
-Once setup is complete, ensure you are still in the /api, and run `npm run dev` to run it continuously, and `npm run start` to start it once, in which case if the server crashes, it will stay down.
+Once setup is complete, ensure you are still in the /api, run `npm run dev` to run it continuously, and `npm run start` to start it once, in which case if the server crashes, it will stay down.
 
 ## Endpoints Table
 ### User
@@ -44,15 +44,17 @@ Many things have changed for favourites as did user, we had mistakenly left out 
 Current data model for favourites:
 * our ID
 * Chicago Institute's ID
+* user's ID
 * title
 * artist
+* notes
 
 This will likely be expanded in the future to accommodate more detailed information.
 ### Artwork
-|Method| Path           |Success Code(s)| Error Code(s) |
-|------|----------------|---------------|---------------|
-|GET   |/api/artwork/   |200 OK         |400 Bad Request|
-|GET   |/api/artwork/:id|200 OK         |404 Not Found  | 
+|Method| Path           |Success Code(s)| Error Code(s)                  |
+|------|----------------|---------------|--------------------------------|
+|GET   |/api/artwork/   |200 OK         |400 Bad Request, 502 Bad Gateway|
+|GET   |/api/artwork/:id|200 OK         |404 Not Found, 502 Bad Gateway  | 
 
 Little has changed from the proposal for artoworks, main difference is path and GET with an id.
 
