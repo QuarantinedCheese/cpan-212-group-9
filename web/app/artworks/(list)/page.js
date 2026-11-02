@@ -1,4 +1,4 @@
-
+import PageHeader from "@/app/components/header";
 
 export const metadata={
     title: 'Browse'
@@ -11,6 +11,7 @@ export const metadata={
 export default function artworksPage() {
     return(
         <>
+        <PageHeader></PageHeader>
         <h1>Art Browsing</h1>
         </>
     )

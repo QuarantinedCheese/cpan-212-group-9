@@ -1,5 +1,5 @@
 import styles from "./page.module.css";
-import Link from "next/link"
+import PageHeader from "./components/header";
 
 
 export const metadata = {
@@ -14,13 +14,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <div className={styles.page}>
-      <header className={styles.header}>
-        <h1>Art Browser</h1>
-        <nav className={styles.nav}>
-          <Link href="/"><h2>Home</h2></Link>
-          <Link href="/artworks"><h2>Browse</h2></Link>
-        </nav>
-      </header>
+      <PageHeader></PageHeader>
       <main>{children}</main>
     </div>
   );
