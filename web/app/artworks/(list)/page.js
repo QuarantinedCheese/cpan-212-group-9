@@ -8,7 +8,7 @@ export const metadata={
 // Should also make it able to display only favourites if toggled.
 
 // Routed by /artworks
-export default function artworksPage() {
+export default function artworksList() {
     return(
         <>
         <PageHeader></PageHeader>

@@ -8,6 +8,7 @@ export default function PageHeader() {
             <nav className={styles.nav}>
                 <Link href="/"><h2>Home</h2></Link>
                 <Link href="/artworks"><h2>Browse</h2></Link>
+                <Link href="/artworks/edit"><h2>Edit</h2></Link>
             </nav>
         </header>
     );
