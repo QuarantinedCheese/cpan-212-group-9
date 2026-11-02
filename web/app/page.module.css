@@ -1,6 +1,6 @@
 .page {
-  --background: #fafafa;
-  --foreground: #fff;
+  --background: #373030;
+  --foreground: #171717;
 
   --text-primary: #000;
   --text-secondary: #666;
@@ -16,4 +16,40 @@
   justify-content: center;
   font-family: var(--font-geist-sans);
   background-color: var(--background);
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.main {
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    height: 10%;
+    width: 100%;
+
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-geist-sans);
+    background-color: var(--foreground);
+}
+
+.nav {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
