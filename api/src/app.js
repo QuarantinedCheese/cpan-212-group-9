@@ -21,7 +21,7 @@ app.use(express.static(path.join(import.meta.dirname, '..', 'public')));
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });
 });
-// Placeholder routes, this is how Express knows what to do with each path
+// This is how Express knows what to do with each path
 app.use('/api/users', usersRouter);
 app.use('/api/favourites', favouritesRouter);
 app.use('/api/artwork', artworkRouter);
