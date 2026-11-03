@@ -42,6 +42,21 @@ a {
   text-decoration: none;
 }
 
+main {
+  width: min(1200px, 90%);
+  margin: 50px auto;
+}
+main > h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--foreground);
+}
+
+main > p {
+  font-size: 1.2rem;
+  color: var(--foreground);
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
