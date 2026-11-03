@@ -1,0 +1,32 @@
+.container {
+    margin-top: 20px;
+}
+
+.button {
+    background-color: #252525;
+    color: #f5f1e8;
+    border: 1px solid #444444;
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.button:hover {
+    background-color: #3b3b3b;
+    border-color: #777777;
+}
+
+.button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.message {
+    margin-top: 10px;
+    
+    color: #a9a9a9;
+    font-size: 13px;
+}

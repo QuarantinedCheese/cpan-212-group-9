@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import styles from "./favourite-button.module.css";
 
 const USER_ID = "3569a16d-e3a7-43b0-9282-8cd99ab82683";
 
@@ -86,11 +87,17 @@ export default function FavouriteButton({ artwork }) {
     }
 }
 return (
-    <div>
-        <button onClick={handleFavourite} disabled={loading}>
-            {loading ? "Loading..." : favourite ? "Remove from Favourites" : "Add to Favourites"}
+    <div className={styles.container}>
+        <button
+        className={styles.button}
+        onClick={handleFavourite}
+        disabled={loading}
+        >
+
+        {loading ? "Loading..." : favourite ? "Remove from Favourites" : "Add to Favourites"}
+
         </button>
-        <p>{message}</p>
+        <p className={styles.message}>{message}</p>
     </div>
-);
-}
+)
+};
