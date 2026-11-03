@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import PageHeader from "@/app/components/header";
+import FavouriteButton from "@/app/components/favourite-button";
 
 // TODO: make this page display expanded details for an artpiece.
 // There should be a button to favourite the piece, and send them to the edit page with the appropriate ID
@@ -46,6 +47,8 @@ export default async function ArtPage({params}) {
             <p>Artist: {artwork.artist}</p>
             <p>Date: {artwork.date}</p>
             <p>Location: {artwork.creationLocation}</p>
+
+            <FavouriteButton artwork={artwork} />
 
             <Link href={`/artworks/edit/${id}`}>Edit Artwork</Link>
         </main>
