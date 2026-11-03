@@ -1,4 +1,13 @@
-// Shown while page is still loading.
+import PageHeader from "@/components/PageHeader";
+
+
 export default function Loading() {
-  return <p role="status">Loading artworks...</p>;
+  return (
+    <>
+      <PageHeader />
+      <main>
+        <p role="status">Loading artwork...</p>
+      </main>
+    </>
+  );
 }
