@@ -1,4 +1,4 @@
-import PageHeader from "@/components/PageHeader";
+import PageHeader from "@/app/components/header";
 
 
 export default function Loading() {
