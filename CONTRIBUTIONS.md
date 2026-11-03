@@ -39,3 +39,14 @@
   - In memory caching
   - Timeout handling
   - Artwork data, controllers, router
+
+# M3. Next.js Frontend
+
+*Kristine May Garcia*
+- Added favourites and favourite button
+- Updated css
+- Updated page for displayed artworks
+- Updated loading.js
+- Updated expanded page display
+
+
