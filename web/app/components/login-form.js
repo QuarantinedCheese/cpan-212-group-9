@@ -16,7 +16,8 @@ export default function LoginForm() {
 
 
     const handleSubmit = (e) => {
-        
+        e.preventDefault();
+        console.log(formData)
     }
 
     return (
@@ -44,6 +45,7 @@ export default function LoginForm() {
         />
         <button
             title="Login"
+            type="submit"
         >Login</button>
         </form>
     );
