@@ -2,36 +2,15 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import PageHeader from "@/app/components/header";
 import FavouriteButton from "@/app/components/favourite-button";
+import { getArtworkById } from "@/app/lib/artworks";
 
 // TODO: make this page display expanded details for an artpiece.
 // There should be a button to favourite the piece, and send them to the edit page with the appropriate ID
 
-async function getArtworkById(id) {
-  const res = await fetch(`http://localhost:4000/api/artwork/${id}`, {
-    cache: "no-store",
-  });
-
- 
-  if (res.status === 404) 
-    return null;
- 
- if (!res.ok) {
-        throw new Error("Failed to fetch artwork");
-}
-
-const result = await res.json();
-console.log("Artwork result", result);
-
-return result.data;
-}
 export default async function ArtPage({params}) {
     const {id} = await params;
     console.log("Artwork ID", id);
-    // const artwork = await - TODO: get the neccessary artwork by ID.
 
-    // if (!artwork){ uncomment when implemented
-    //     notFound();
-    // }
     const artwork = await getArtworkById(id);
     console.log("Artwork", id);
     console.log("Artwork", artwork);

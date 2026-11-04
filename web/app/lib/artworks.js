@@ -19,7 +19,7 @@ export async function getArtworks() {
 
 
 // Loads one artwork
-export async function getArtworkByID(id) {
+export async function getArtworkById(id) {
     const res = await fetch(API_ORIGIN + '/api/artwork/' + id, { cache: 'no-store' });
 
     if (res.status === 404) {

@@ -1,6 +1,7 @@
 import PageHeader from "@/app/components/header";
 import Link from "next/link";
 import { Suspense } from "react";
+import { getArtworks } from "@/app/lib/artworks";
 
 
 export const metadata={
@@ -9,18 +10,6 @@ export const metadata={
 
 // TODO: Have this page display a list of artworks
 // Should also make it able to display only favourites if toggled.
-
-async function getArtworks() {
-        const res = await fetch(`${process.env.API_URL}/api/artwork`, {
-            cache: "no-store",
-        });
-        if (!res.ok) {
-            throw new Error('Failed to fetch artworks');
-        }
-
-        const result = await res.json();
-        return result.data;
-    } 
 
 async function ArtworksList() {
     let artworks;
