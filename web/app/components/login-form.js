@@ -11,7 +11,8 @@ export default function LoginForm() {
 
 
     const handleChange = (e) => {
-        
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
     }
 
 
@@ -27,8 +28,8 @@ export default function LoginForm() {
         </label>
         <input
             type="text"
-            id="Username"
-            name="Username"
+            id="username"
+            name="username"
             value={formData.username}
             onChange={handleChange}
         />
@@ -37,9 +38,9 @@ export default function LoginForm() {
             Password:
         </label>
         <input
-            type="Password"
-            id="Password"
-            name="Password"
+            type="password"
+            id="password"
+            name="password"
             value={formData.password}
             onChange={handleChange}
         />
@@ -49,5 +50,4 @@ export default function LoginForm() {
         >Login</button>
         </form>
     );
-    
 }
