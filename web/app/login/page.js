@@ -1,8 +1,5 @@
 import PageHeader from "@/app/components/header";
-
-export const metadata={
-    title: 'Login'
-};
+import LoginForm from "../components/login-form";
 
 // TODO: Allow the user to login using this page.
 // Once logged in, route to home page.
@@ -18,6 +15,7 @@ export default function LoginPage() {
         <>
         <PageHeader></PageHeader>
         <h1>Login Page</h1>
+        <LoginForm></LoginForm>
         </>
-    )
+    );
 }
