@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import styles from "./login-form.module.css";
+import { getUsers } from "../lib/users";
 
 export default function LoginForm() {
     const [formData, setFormData] = useState({
@@ -16,14 +17,20 @@ export default function LoginForm() {
     }
 
 
-    const handleSubmit = (e) => {
+    async function handleSubmit(e) {
         e.preventDefault();
-        console.log(formData)
+        const {username, password} = e.target;
+
+        const res = await getUsers({search: username.value})
+        
+        // Username Validation
+
+        // TODO: Password Validation
     }
 
     return (
-        <form className={styles.form}>
-        <label htmlFor="Username" onSubmit={handleSubmit}>
+        <form className={styles.form} onSubmit={handleSubmit}>
+        <label htmlFor="username">
             Username:
         </label>
         <input
@@ -34,7 +41,7 @@ export default function LoginForm() {
             onChange={handleChange}
         />
         
-        <label htmlFor="Password" onSubmit={handleSubmit}>
+        <label htmlFor="password">
             Password:
         </label>
         <input
@@ -45,7 +52,6 @@ export default function LoginForm() {
             onChange={handleChange}
         />
         <button
-            title="Login"
             type="submit"
         >Login</button>
         </form>

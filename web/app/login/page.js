@@ -9,7 +9,11 @@ import LoginForm from "../components/login-form";
 // TODO: allow the user to create a new account through here as well
 // Or another page
 
-// Routed by /artworks
+export const metadata={
+    title: 'Login'
+};
+
+// Routed by /Login
 export default function LoginPage() {
     return(
         <>
