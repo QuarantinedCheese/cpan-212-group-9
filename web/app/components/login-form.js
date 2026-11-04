@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import styles from "./login-form.module.css";
 
 export default function LoginForm() {
     const [username, setUsername] = useState("");
@@ -10,7 +11,7 @@ export default function LoginForm() {
     }
 
     return (
-        <form>
+        <form className={styles.form}>
         <label htmlFor="Username" onSubmit={handleSubmit}>
             Username:
         </label>
@@ -22,8 +23,11 @@ export default function LoginForm() {
             onChange={setUsername}
         />
         
+        <label htmlFor="Password" onSubmit={handleSubmit}>
+            Password:
+        </label>
         <input
-            type="password"
+            type="Password"
             id="Password"
             name="Password"
         />
