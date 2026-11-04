@@ -49,4 +49,11 @@
 - Updated loading.js
 - Updated expanded page display
 
+*Ethan Pothier*
+* Prepared /web for web implementation
+* Added basic header for easier development
+* Prepped all* pages for implementation
+* Implemented not-found.js
+* Helped keep repo and files organized and coherent
 
+*Autumn Gun-Munro*
