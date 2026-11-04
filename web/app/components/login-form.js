@@ -4,7 +4,16 @@ import { useState } from "react";
 import styles from "./login-form.module.css";
 
 export default function LoginForm() {
-    const [username, setUsername] = useState("");
+    const [formData, setFormData] = useState({
+        username: "",
+        password: "",
+    });
+
+
+    const handleChange = (e) => {
+        
+    }
+
 
     const handleSubmit = (e) => {
         
@@ -19,8 +28,8 @@ export default function LoginForm() {
             type="text"
             id="Username"
             name="Username"
-            value={username}
-            onChange={setUsername}
+            value={formData.username}
+            onChange={handleChange}
         />
         
         <label htmlFor="Password" onSubmit={handleSubmit}>
@@ -30,6 +39,8 @@ export default function LoginForm() {
             type="Password"
             id="Password"
             name="Password"
+            value={formData.password}
+            onChange={handleChange}
         />
         <button
             title="Login"
