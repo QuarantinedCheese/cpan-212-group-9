@@ -4,9 +4,21 @@ if (!API_ORIGIN) {
 }
 
 // Load multiple users, with the option of searching
-export async function getUsers({search}) {
+export async function getUsers({username, search}) {
+    // Check if username is being used
+    let params = '';
+    if (username != undefined) {
+        params += `?username=${username}`;
+    }
 
-    const res = await fetch(API_ORIGIN + '/api/users' + `?q=${search}`, { cache: 'no-store' });
+    // Check if search is being used
+    if (search != undefined && params == '') {
+        params += `?search=${search}`;
+    } else if (search != undefined) {
+        params += `&search=${search}`;
+    }
+
+    const res = await fetch(API_ORIGIN + '/api/users' + params, { cache: 'no-store' });
 
     if (!res.ok) {
         throw new Error('The API answered ' + res.status + ' when loading artworks.');

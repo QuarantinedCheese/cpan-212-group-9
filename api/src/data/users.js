@@ -36,8 +36,12 @@ const users = [
 // Following functions follow CRUD
 // Extra functions may be required for other files.
 // These will be used by src/controllers/users.controllers.js, then routed
-export function findUsers({q} = {}) {
+export function findUsers({username, q} = {}) {
     let searchResults = users;
+    if (username) { // Check exact matches for username
+        searchResults = searchResults.filter((user) => user.username === username)
+    }
+
     if (q) { // Finds user by the search
         const search = q.toLowerCase();
         searchResults = searchResults.filter((user) => user.username.toLowerCase().includes(search));

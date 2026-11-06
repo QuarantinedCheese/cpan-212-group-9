@@ -21,11 +21,14 @@ export default function LoginForm() {
         e.preventDefault();
         const {username, password} = e.target;
 
-        const res = await getUsers({search: username.value})
+        const result = await getUsers({username: username.value})
+
+        console.log(result)
         
         // Username Validation
 
         // TODO: Password Validation
+        // Passwords currently non-existent in the data.
     }
 
     return (
