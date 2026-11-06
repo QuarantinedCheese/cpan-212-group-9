@@ -5,6 +5,8 @@ import styles from "./login-form.module.css";
 import { getUsers } from "../lib/users";
 
 export default function LoginForm() {
+    const [message, setMessage] = useState(" ")
+
     const [formData, setFormData] = useState({
         username: "",
         password: "",
@@ -19,16 +21,25 @@ export default function LoginForm() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        const {username, password} = e.target;
 
-        const result = await getUsers({username: username.value})
+        try {
+            const {username, password} = e.target;
 
-        console.log(result)
+            const result = await getUsers({username: username.value})
+            
+            console.log(result[0])
+            
+            // Username Validation
+            if (!result[0]) {
+                throw new Error("Username not found.")
+            }
+
+            // TODO: Password Validation, check if password matches database
+            // Passwords currently non-existent in the data.
+        } catch (error) {
+            setMessage(error.message)
+        }
         
-        // Username Validation
-
-        // TODO: Password Validation
-        // Passwords currently non-existent in the data.
     }
 
     return (
@@ -57,6 +68,7 @@ export default function LoginForm() {
         <button
             type="submit"
         >Login</button>
+        <p>{message}</p>
         </form>
     );
 }

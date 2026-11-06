@@ -26,7 +26,7 @@ export async function getUsers({username, search}) {
 
     const body = await res.json();
     return body.data;
-} // end get artworks
+} // end get users
 
 // Load one user
 export async function getUserById(id) {
