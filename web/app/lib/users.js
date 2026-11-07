@@ -42,3 +42,23 @@ export async function getUserById(id) {
     const body = await res.json();
     return body.data;
 }
+
+
+// Create one user
+export async function postUser(params) {
+    const res = await fetch (API_ORIGIN + '/api/users/' + {params},{
+        cache: 'no-store',
+        method: "POST"
+    });
+
+    if (res.status === 400) {
+        return null;
+    }
+
+    if (!res.ok) {
+        throw new Error('The API answered ' + res.status + ' when attempting to create user with params: ' + params);
+    }
+
+    const body = await res.json();
+    return body.data;
+}
