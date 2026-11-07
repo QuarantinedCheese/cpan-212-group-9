@@ -45,10 +45,16 @@ export async function getUserById(id) {
 
 
 // Create one user
-export async function postUser(params) {
-    const res = await fetch (API_ORIGIN + '/api/users/' + {params},{
+export async function postUser({params}) {
+    console.log(params)
+    const res = await fetch (API_ORIGIN + '/api/users/',{
         cache: 'no-store',
-        method: "POST"
+        method: "POST",
+        headers: { "Content-Type": "application/json",},
+        body: JSON.stringify({
+            username: params.username,
+            email: params.email,
+        })
     });
 
     if (res.status === 400) {
@@ -56,7 +62,7 @@ export async function postUser(params) {
     }
 
     if (!res.ok) {
-        throw new Error('The API answered ' + res.status + ' when attempting to create user with params: ' + params);
+        throw new Error('The API answered ' + res.status + ' when attempting to create user with params: ' + {...params});
     }
 
     const body = await res.json();

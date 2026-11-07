@@ -25,8 +25,6 @@ export function validateUserInput(body, { partial = false } = {}) {
     if (shouldCheck('email')) {
         // Regex taken via https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
         const re = /^\S+@\S+\.\S+$/;
-        console.log(body.email);
-        console.log(body.email.toLowerCase().match(re));
         if (body.email.toLowerCase().match(re)) { // Tests email against the regex
             value.email = body.email;
         } else {
