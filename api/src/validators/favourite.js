@@ -46,11 +46,11 @@ export function validateFavourites(body, {partial = false} = {}) {
         }
     }
 
-    // Check to make sure notes are no more than 5000 chars.
+    // Check to make sure notes are no more than 2000 chars.
     if (shouldCheck('notes')) {
         const notes = typeof body.notes == 'string' ? body.notes.trim() : '';
-        if (notes.length > 5000) {
-            errors.notes = 'Notes are limited to 5000 characters.';
+        if ([...notes].length > 2000) {
+            errors.notes = 'Notes are limited to 2000 characters.';
         } else {
             values.notes = notes;
         }
