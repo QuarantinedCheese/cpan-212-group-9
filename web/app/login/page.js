@@ -17,7 +17,7 @@ export const metadata={
 export default function LoginPage() {
     return(
         <>
-        {/* <PageHeader></PageHeader> */}
+        <PageHeader></PageHeader>
         <h1>Login Page</h1>
         <LoginForm></LoginForm>
         </>
