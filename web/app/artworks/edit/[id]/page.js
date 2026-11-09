@@ -1,20 +1,30 @@
-import { notFound } from "next/navigation";
 import PageHeader from "@/app/components/header";
-// TODO: display an edit form for an art piece that allows the user to 
-// change the notes they applied to a piece.
-// Should be navigated to from an existing art piece (not the temp homepage)
+import ArtworkEdit from "@/app/components/edit-artwork";
+import { notFound } from "next/navigation";
+import { getArtworkById } from "@/app/lib/artworks";
+
+export const instant = false;
+
+
 export default async function editPage({params}) {
     const {id} = await params;
-    // const artwork = await - TODO: get the neccessary artwork by ID.
+    const artwork = await getArtworkById(id);
 
-    // if (!artwork){ uncomment when implemented
-    //     notFound();
-    // }
+    if (!artwork){
+        notFound();
+    }
 
     return (
         <article>
             <PageHeader />
             <h2>Artwork</h2>
+            <h1>{artwork.title}</h1>
+            <p>{artwork.shortDescription}</p>
+            <p>Artist: {artwork.artist}</p>
+            <p>Date: {artwork.date}</p>
+            <p>Location: {artwork.creationLocation}</p>
+            
+            <ArtworkEdit artwork={artwork}/>
         </article>
     )
 }
