@@ -55,5 +55,6 @@
 * Prepped all* pages for implementation
 * Implemented not-found.js
 * Helped keep repo and files organized and coherent
+* Implemented the login and editing pages
 
 *Autumn Gun-Munro*
