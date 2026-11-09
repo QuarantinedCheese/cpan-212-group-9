@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import styles from "./favourite-button.module.css";
+import Link from "next/link";
 
 const USER_ID = "3569a16d-e3a7-43b0-9282-8cd99ab82683";
 
@@ -98,6 +99,8 @@ return (
 
         </button>
         <p className={styles.message}>{message}</p>
+
+        {favourite ? <Link href={`/artworks/edit/${artwork.id}`}>Edit Notes</Link> : null}
     </div>
 )
 };

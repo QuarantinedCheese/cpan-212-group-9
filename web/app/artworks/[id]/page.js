@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import PageHeader from "@/app/components/header";
 import FavouriteButton from "@/app/components/favourite-button";
 import { getArtworkById } from "@/app/lib/artworks";
@@ -15,7 +14,7 @@ export default async function ArtPage({params}) {
     const artwork = await getArtworkById(id);
     console.log("Artwork", id);
     console.log("Artwork", artwork);
-    
+
     if (!artwork) {
         return notFound();
     }
@@ -31,7 +30,7 @@ export default async function ArtPage({params}) {
 
             <FavouriteButton artwork={artwork} />
 
-            <Link href={`/artworks/edit/${id}`}>Edit Artwork</Link>
+            
         </main>
         </>
     );
