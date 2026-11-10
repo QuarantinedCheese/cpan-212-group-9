@@ -1,7 +1,5 @@
 import { HttpError } from '../utils/http-error.js';
 
-// Add image portion later
-
 const artworks = [
     {
         id: 'b2c3d4e5-f6a7-8901-bcde-f12345678901',
@@ -10,7 +8,8 @@ const artworks = [
         date: '1831',
         artist: 'Hokusai',
         creationLocation: 'Japan',
-        shortDescription: 'Woodblock print showing massive waves framing Mount Fuji.'
+        shortDescription: 'Woodblock print showing massive waves framing Mount Fuji.',
+        imageUrl: null
     },
     {
         id: 'c3d4e5f6-a789-01bc-def1-234567890123',
@@ -19,7 +18,8 @@ const artworks = [
         date: '1889',
         artist: 'Vincent van Gogh',
         creationLocation: 'Saint-Rémy-de-Provence, France',
-        shortDescription: 'Post-impressionistic oil painting depicting a swirling night sky over a Dutch village.'
+        shortDescription: 'Post-impressionistic oil painting depicting a swirling night sky over a Dutch village.',
+        imageUrl: null
     },
     {
         id: 'd4e5f6a7-8901-bcde-f123-456789012345',
@@ -28,7 +28,8 @@ const artworks = [
         date: '1893',
         artist: 'Edvard Munch',
         creationLocation: 'Norway',
-        shortDescription: 'Iconic expressionist painting depicting a figure with an agonized expression against a fiery sky.'
+        shortDescription: 'Iconic expressionist painting depicting a figure with an agonized expression against a fiery sky.',
+        imageUrl: null
     }
 ];
 
@@ -73,28 +74,59 @@ function setCache(key, data) {
     });
 }
 
+const API_BASE = 'https://api.artic.edu/api/v1';
+const FALLBACK_IIIF_URL = 'https://www.artic.edu/iiif/2';
+
+//needed to not be blocked by API
+const HEADERS = {
+    'User-Agent': 'ArtGalleryClassProject/1.0',
+    'AIC-User-Agent': 'ArtGalleryClassProject/1.0',
+    'Accept': 'application/json'
+};
+
+const FIELDS = [
+    'id',
+    'title',
+    'alt_titles',
+    'date_display',
+    'artist_display',
+    'place_of_origin',
+    'thumbnail',
+    'image_id'
+].join(',');
+
+function toArtwork(item, iiifUrl = FALLBACK_IIIF_URL) {
+    return {
+        id: String(item.id),
+        title: item.title,
+        altTitles: item.alt_titles || [],
+        date: item.date_display,
+        artist: item.artist_display,
+        creationLocation: item.place_of_origin,
+        shortDescription: item.thumbnail?.alt_text || '',
+        imageUrl: item.image_id
+            ? `${iiifUrl}/${item.image_id}/full/843,/0/default.jpg`
+            : null
+    };
+}
+
 export async function fetchExternalSearch(query) {
     const key = `search_${query.toLowerCase()}`;
     const cached = getCached(key);
     if (cached) return cached;
     try {
         const res = await fetch(
-            `https://api.artic.edu/api/v1/artworks/search?q=${encodeURIComponent(query)}`,
-            { signal: AbortSignal.timeout(5000) }
+            `${API_BASE}/artworks/search?q=${encodeURIComponent(query)}&fields=${FIELDS}&limit=10`,
+            { headers: HEADERS, signal: AbortSignal.timeout(5000) }
         );
         if (!res.ok) {
+            const body = await res.text();
+            console.error('AIC search error', res.status, body.slice(0, 300));
             throw new HttpError(502, 'Bad Gateway');
         }
         const json = await res.json();
-        const results = json.data.map(item => ({
-            id: String(item.id),
-            title: item.title,
-            altTitles: item.alt_titles || [],
-            date: item.date_display,
-            artist: item.artist_display,
-            creationLocation: item.place_of_origin,
-            shortDescription: item.thumbnail?.alt_text || ''
-        }));
+        const iiifUrl = json.config?.iiif_url || FALLBACK_IIIF_URL;
+        const results = json.data.map((item) => toArtwork(item, iiifUrl));
         setCache(key, results);
         return results;
     } catch (err) {
@@ -102,6 +134,7 @@ export async function fetchExternalSearch(query) {
             throw new HttpError(504, 'Gateway Timeout');
         }
         if (err instanceof HttpError) throw err;
+        console.error('fetchExternalSearch failed:', err);
         throw new HttpError(502, 'Bad Gateway');
     }
 }
@@ -112,23 +145,17 @@ export async function fetchExternalById(id) {
     if (cached) return cached;
     try {
         const res = await fetch(
-            `https://api.artic.edu/api/v1/artworks/${id}`,
-            { signal: AbortSignal.timeout(5000) }
+            `${API_BASE}/artworks/${encodeURIComponent(id)}?fields=${FIELDS}`,
+            { headers: HEADERS, signal: AbortSignal.timeout(5000) }
         );
         if (!res.ok) {
+            const body = await res.text();
+            console.error('AIC by-id error', res.status, body.slice(0, 300));
             throw new HttpError(502, 'Bad Gateway');
         }
         const json = await res.json();
-        const item = json.data;
-        const artwork = {
-            id: String(item.id),
-            title: item.title,
-            altTitles: item.alt_titles || [],
-            date: item.date_display,
-            artist: item.artist_display,
-            creationLocation: item.place_of_origin,
-            shortDescription: item.thumbnail?.alt_text || ''
-        };
+        const iiifUrl = json.config?.iiif_url || FALLBACK_IIIF_URL;
+        const artwork = toArtwork(json.data, iiifUrl);
 
         setCache(key, artwork);
         return artwork;
@@ -137,6 +164,7 @@ export async function fetchExternalById(id) {
             throw new HttpError(504, 'Gateway Timeout');
         }
         if (err instanceof HttpError) throw err;
+        console.error('fetchExternalById failed:', err);
         throw new HttpError(502, 'Bad Gateway');
     }
 }

@@ -36,3 +36,16 @@ export async function getArtwork(req, res, next) {
         next(err);
     }
 }
+
+export async function searchArtworks(req, res, next) {
+    try {
+        const query = req.query.q;
+        if (!query) {
+            return res.json(findArtworks());
+        }
+        const results = await fetchExternalSearch(query);
+        res.json(results);
+    } catch (err) {
+        next(err);
+    }
+}

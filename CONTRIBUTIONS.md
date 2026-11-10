@@ -58,3 +58,5 @@
 * Implemented the login and editing pages
 
 *Autumn Gun-Munro*
+- Added image url mapping
+- Added searchArtworks route controller
