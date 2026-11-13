@@ -56,6 +56,7 @@
 * Implemented not-found.js
 * Helped keep repo and files organized and coherent
 * Implemented the login and editing pages
+* Individual Video: https://youtu.be/cGmxKRjwUdc
 
 *Autumn Gun-Munro*
 - Added image url mapping
