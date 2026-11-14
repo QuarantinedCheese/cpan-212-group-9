@@ -8,6 +8,17 @@ Eg:
 * Example item. - Ethan
   * Blah blah blah.
 
+## General
+Non-milestone specific items, anything that isn't really required, but should be done
+
+* Proper CSS styling
+  * Home Page
+  * Browse Page
+  * Art Detail Page
+  * Login Page
+  * Notes Editing Page
+* 
+
 ## M4
 Initialised based on the M4 checklist [in the docs](https://docs.dorzairi.com/docs/3dbba291-e3c7-4289-a0a6-a3d2d19fb881/).
 
