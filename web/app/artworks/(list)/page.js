@@ -16,7 +16,8 @@ async function ArtworksList() {
 
     try {
         artworks = await getArtworks();
-    } catch {
+    } catch (error) {
+        
         return <p> Failed to load artworks. Please try again later.</p>;
     }
 
@@ -35,6 +36,8 @@ async function ArtworksList() {
                     </h2>
                     <p>Artist: {artwork.artist}</p>
                     <p>Date: {artwork.date}</p>
+                    
+                   
                 </li>
             ))}
 
