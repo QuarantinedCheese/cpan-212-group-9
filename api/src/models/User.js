@@ -1,9 +1,23 @@
 import mongoose from 'mongoose';
 
-
+// Scheme is the list of rules for each field
+// Mongoose checks these before saving. Replaces the validators
 const userSchema = new mongoose.Scheme(
     {
-
+        username: {
+            type: String,
+            required: [true, 'Username is required'],
+            trim: true,
+            lowercase: true,
+            minlength: [5, 'Username must be 5 to 30 chars.'],
+            maxlength: [30, 'Username must be 5 to 30 chars.'],
+            validate: {validator: v => /^\S+@\S+\.\S+$/.test(v), message: 'Invalid address'},
+        },
+        email: {
+            type: String,
+            required: [true, 'Email is required'],
+            trim: true,
+        }
     },
     {
         timestamps: {createdAt: true, updatedAt: false},
