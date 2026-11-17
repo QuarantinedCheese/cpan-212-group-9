@@ -23,7 +23,7 @@ Non-milestone specific items, anything that isn't really required, but should be
 Initialised based on the M4 checklist [in the docs](https://docs.dorzairi.com/docs/3dbba291-e3c7-4289-a0a6-a3d2d19fb881/).
 
 * Connection.
-  * API runs The API runs `await mongoose.connect(process.env.MONGODB_URI)` before `app.listen`, stops with a clear message if `MONGODB_URI` is missing
+  * The API runs `await mongoose.connect(process.env.MONGODB_URI)` before `app.listen`, stops with a clear message if `MONGODB_URI` is missing
   * Sets `mongoose.set('sanitizeFilter', true)`.
   * `api/.env.example` lists `MONGODB_URI` with a fake value.
 * Models replace in-memory data.
