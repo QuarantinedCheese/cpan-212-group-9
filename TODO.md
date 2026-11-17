@@ -1,7 +1,7 @@
 # TODO list
 
 When choosing to work on an item, please add your name next to it so that the others know you are working on it.\
-When an item is completed, remove it from the list.\
+When an item is completed, remove it from the list, or add it to the completed section.\
 If there is something you know needs to be done, and it is not on the list, please add it with as many details as you can.
 
 Eg:
@@ -22,10 +22,6 @@ Non-milestone specific items, anything that isn't really required, but should be
 ## M4
 Initialised based on the M4 checklist [in the docs](https://docs.dorzairi.com/docs/3dbba291-e3c7-4289-a0a6-a3d2d19fb881/).
 
-* Connection. - Ethan
-  * The API runs `await mongoose.connect(process.env.MONGODB_URI)` before `app.listen`, stops with a clear message if `MONGODB_URI` is missing
-  * Sets `mongoose.set('sanitizeFilter', true)`.
-  * `api/.env.example` lists `MONGODB_URI` with a fake value.
 * Models replace in-memory data.
   * Both main resources are Mongoose 9 models with schema validation (required fields, and lengths, ranges or enums where they fit).
   * Every M2 endpoint now reads and writes MongoDB, and no in-memory arrays are left for these resources (the external API cache can stay in memory).
@@ -50,3 +46,10 @@ Initialised based on the M4 checklist [in the docs](https://docs.dorzairi.com/do
   * The `README` says how to set `MONGODB_URI`, how to run the seed, and which query parameters the list endpoint accepts.
   * `CONTRIBUTIONS.md` has an M4 section.
 * 
+
+### M4 Completed
+
+* Connection. - Ethan
+  * The API runs `await mongoose.connect(process.env.MONGODB_URI)` before `app.listen`, stops with a clear message if `MONGODB_URI` is missing
+  * Sets `mongoose.set('sanitizeFilter', true)`.
+  * `api/.env.example` lists `MONGODB_URI` with a fake value.
