@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 // Scheme is the list of rules for each field
 // Mongoose checks these before saving. Replaces the validators
-const userSchema = new mongoose.Scheme(
+const userSchema = new mongoose.Schema(
     {
         username: {
             type: String,
