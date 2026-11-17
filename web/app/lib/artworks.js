@@ -1,5 +1,5 @@
 // Get the API
-let API_ORIGIN = process.env.API_ORIGIN;
+let API_ORIGIN = process.env.API_URL;
 if (!API_ORIGIN) {
     API_ORIGIN = 'http://localhost:4000';
 }
@@ -7,6 +7,7 @@ if (!API_ORIGIN) {
 // Loads a set of artworks from the API
 export async function getArtworks() {
     // cache
+    
     const res = await fetch(API_ORIGIN + '/api/artwork', { cache: 'no-store' });
 
     if (!res.ok) {

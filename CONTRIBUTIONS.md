@@ -48,6 +48,7 @@
 - Updated page for displayed artworks
 - Updated loading.js
 - Updated expanded page display
+- Individual video: https://youtu.be/06PfVpiFcD8
 
 *Ethan Pothier*
 * Prepared /web for web implementation

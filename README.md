@@ -20,3 +20,6 @@ Navigate to the respective /api or /web for each.
 Use `npm run dev` to run the API and WEB server. Make sure to leave the terminal open for both servers. 
 
 If any issues persist, double check environment variables.
+
+# M3 Walkthrough
+https://youtu.be/hnUw5Ov5w4M
