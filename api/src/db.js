@@ -5,7 +5,7 @@ mongoose.set('sanitizeFilter', true);
 // Connects to the mongodb database string in .env
 // server.js and scripts/seed.js call this first.
 export async function connectDb() {
-    const uri = process.env.MONGO_URI;
+    const uri = process.env.MONGODB_URI;
     if (!uri) {
         console.error('MONGODB_URI is not set. Copy .env.example to .env and put the connection string in it.');
         process.exit(1);
@@ -19,5 +19,5 @@ export async function connectDb() {
         process.exit(1);
     }
 
-    console.log(`Connected to MongoDB successfully, databae: "${mongoose.connection.name}"`);
+    console.log(`Connected to MongoDB successfully, database: "${mongoose.connection.name}"`);
 }
