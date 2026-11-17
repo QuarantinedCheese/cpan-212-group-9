@@ -11,12 +11,13 @@ const userSchema = new mongoose.Schema(
             lowercase: true,
             minlength: [5, 'Username must be 5 to 30 chars.'],
             maxlength: [30, 'Username must be 5 to 30 chars.'],
-            validate: {validator: v => /^\S+@\S+\.\S+$/.test(v), message: 'Invalid address'},
+            
         },
         email: {
             type: String,
             required: [true, 'Email is required'],
             trim: true,
+            validate: {validator: v => /^\S+@\S+\.\S+$/.test(v), message: 'Invalid address'},
         }
     },
     {
