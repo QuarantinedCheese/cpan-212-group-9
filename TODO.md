@@ -46,7 +46,7 @@ Initialised based on the M4 checklist [in the docs](https://docs.dorzairi.com/do
 * Seed script.
   * `npm run seed` in `api/` deletes and re-creates sample data for every model, with at least 25 documents in the paginated collection.
   * No route creates or deletes seed data.
-* `README` and `CONTRIBUTIONS.md`.
+* `README` and `CONTRIBUTIONS.md`. - Ethan
   * The `README` says how to set `MONGODB_URI`, how to run the seed, and which query parameters the list endpoint accepts.
   * `CONTRIBUTIONS.md` has an M4 section.
 * 
