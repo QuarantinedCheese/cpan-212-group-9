@@ -20,9 +20,10 @@ const favSchema = new mongoose.Schema(
             type: String,
             required: [true, 'Institute ID must exist.'],
         },
-        userID: {
-            type: String,
-            required: [true, 'The artwork must be connected to a user, provide one for it to function.'],
+        userId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: [true, 'A user is required.'],
         },
         notes: {
             type: String,
