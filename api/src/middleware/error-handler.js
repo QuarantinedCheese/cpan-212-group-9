@@ -1,4 +1,5 @@
 import { HttpError } from '../utils/http-error.js';
+import mongoose from 'mongoose';
 
 // Error handler from week 3 materials for testing purposes
 
@@ -11,6 +12,21 @@ export function errorHandler(err, req, res, next) {
   // express.json() sets type 'entity.parse.failed' when the body is not valid JSON.
   if (err.type === 'entity.parse.failed') {
     return res.status(400).json({ error: { message: `Request body must be valid JSON (Recieved: ${req.body})` } });
+  }
+
+  if (err instanceof mongoose.Error.ValidationError) {
+    const details = {};
+
+    for (const field in err.errors) {
+      details[field] = err.errors[field].message;
+    }
+
+    return res.status(400).json({
+      error: {
+        message: 'Validation failed',
+        details,
+      },
+    });
   }
 
   const status = err.status ?? 500;
