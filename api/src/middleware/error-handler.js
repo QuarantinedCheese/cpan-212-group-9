@@ -29,6 +29,14 @@ export function errorHandler(err, req, res, next) {
     });
   }
 
+  if (err instanceof mongoose.Error.CastError && err.kind === 'ObjectId') {
+    return res.status(404).json({
+      error: {
+        message: 'Resource not found.',
+      },
+    });
+  }
+
   const status = err.status ?? 500;
   // An HttpError was thrown on purpose, so its message is safe to show. Any other 5xx error is a bug:
   // log the details for yourself, and never send the stack trace to the client.

@@ -20,15 +20,15 @@ export async function findFavouritesController (req, res) {
     res.json({ data: favourites });
 }
 
-export function getFavouriteById (req, res) {
-    const favourite = findFavouriteById(
-        req.params.id
-    );
+export async function getFavouriteById(req, res) {
+    const favourite = await Favourite.findById(req.params.id)
+    .populate('userId');
 
     if (!favourite) {
         throw new HttpError(404, 'Favourite not found.');
     }
-    res.json({ data : favourite});
+
+    res.json({ data: favourite });
 }
 
 export function updateFavouriteController (req, res) {
