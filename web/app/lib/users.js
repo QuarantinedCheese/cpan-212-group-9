@@ -57,13 +57,19 @@ export async function postUser({params}) {
         })
     });
 
-    if (res.status === 400) {
-        return null;
+    if (!res.ok) {
+        const body = await res.json();
+
+        const details = body.error?.details;
+
+        if (details) {
+            throw new Error(Object.values(details).join(' '));
+        }
+
+        throw new Error(body.error?.message || 'Could not create user.');
     }
 
-    if (!res.ok) {
-        throw new Error('The API answered ' + res.status + ' when attempting to create user with params: ' + {...params});
-    }
+    
 
     const body = await res.json();
     return body.data;

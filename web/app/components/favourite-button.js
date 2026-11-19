@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import styles from "./favourite-button.module.css";
 import Link from "next/link";
 
-const USER_ID = "3569a16d-e3a7-43b0-9282-8cd99ab82683";
+const USER_ID = "6afe2b0592ae78000465c2d6";
 
 export default function FavouriteButton({ artwork }) {
     const [message, setMessage] = useState("");
@@ -23,7 +23,7 @@ export default function FavouriteButton({ artwork }) {
 
             const savedFavourite = result.data.find(
                 (item) =>
-                    item.id === artwork.id && item.userId === USER_ID
+                    item.instituteID === artwork.id && item.userId?.id === USER_ID
             );
 
             setFavourite(savedFavourite || null);
@@ -44,8 +44,11 @@ export default function FavouriteButton({ artwork }) {
         setMessage("");
 
         try {
+            console.log("Artwork ID: ", artwork.id);
+            console.log("Artwork:", artwork);
           if (favourite) {
-            const response = await fetch(`/api/favourites/${favourite.favouritesId}`, {
+            
+            const response = await fetch(`/api/favourites/${favourite.id}`, {
                 method: "DELETE" }
             );
 
@@ -62,7 +65,7 @@ export default function FavouriteButton({ artwork }) {
                 headers: { "Content-Type": "application/json",},
 
                 body: JSON.stringify({
-                    id: artwork.id,
+                    instituteID: artwork.id,
                     title: artwork.title,
                     artist: artwork.artist,
                     userId: USER_ID,
@@ -75,7 +78,13 @@ export default function FavouriteButton({ artwork }) {
             const result = await res.json();
 
             if (!res.ok) {
-                throw new Error("Could not add to Favourites.");
+                const details = result.error?.details;
+
+                if (details) {
+                    throw new Error(Object.values(details).join(" "));
+                }
+                throw new Error(
+                    result.error?.message || "Could not add to Favourites.");
             }
 
             setFavourite(result.data);

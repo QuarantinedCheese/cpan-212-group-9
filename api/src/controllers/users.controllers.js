@@ -1,9 +1,10 @@
-import { findUsers, deleteUserById, findUserById, insertUser, updateUserById } from "../data/users.js";
+
 import { HttpError } from '../utils/http-error.js';
+import { User } from "../models/User.js";
 
 // req is the user request, res is the response we are building with each function
 
-export function listUsers(req, res) {
+export async function listUsers(req, res) {
     const {username, q} = req.query
     // Shouldn't have to verify that username exists, but for artworks/favourites,
     // may be worth replacing 'username' with something like 'genre'.
@@ -13,36 +14,53 @@ export function listUsers(req, res) {
     if (q !== undefined && typeof q !== 'string') {
         throw new HttpError(400, 'invalid query', {q: 'Send q only once'});
     }
-    res.json({ data: findUsers( {username, q} ) });
+
+    const filter = {};
+
+    if (username) {
+        filter.username = username;
+    }
+    if (q) {
+        filter.username = { $regex: q, $options: 'i'};
+    }
+
+    const users = await User.find(filter);
+    res.json({ data: users });
 }
 
-export function getUser(req, res) {
+export async function getUser(req, res) {
     // Finds user by ID and throws an error if it fails to find user.
-    const user = findUserById(req.params.id);
+    const user = await User.findById(req.params.id);
     if (!user) {
         throw new HttpError(404, 'User not found.');
     }
     res.json({data: user});
 }
 
-export function createUser(req, res) {
+export async function createUser(req, res) {
     // Creates new user based on request
-    const user = insertUser(req.body);
+    const user = await User.create(req.body);
     res.location(`/api/users/${user.id}`).status(201).json({data: user});
 }
 
-export function updateUser(req, res) {
+export async function updateUser(req, res) {
     // Updates user profile based on the request
-    const user = updateUserById(req.params.id, req.body);
+    const user = await User.findByIdAndUpdate(req.params.id, req.body,
+        {
+            new: true,
+            runValidators: true,
+        }
+    );
     if (!user) {
-        throw newHttpError(404, 'User not found.');
+        throw new HttpError(404, 'User not found.');
     }
     res.json({data: user});
 }
 
-export function deleteUser(req, res) {
+export async function deleteUser(req, res) {
+    const deleted = await User.findByIdAndDelete(req.params.id);
     // Deletes the user profile
-    if (!deleteUserById(req.params.id)) {
+    if (!deleted) {
         throw new HttpError(404, 'User not found.');
     }
     res.status(204).end();

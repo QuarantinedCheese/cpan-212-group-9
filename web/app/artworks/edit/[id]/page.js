@@ -23,7 +23,7 @@ export default async function editPage({params}) {
     const handleSave = async (notes) => {
         "use server";
         // TODO: call a fetch function that updates saved notes
-        const result = await patchFavouriteNotes({params: {notes: notes, id: faved.favouritesId}})
+        const result = await patchFavouriteNotes({params: {notes: notes, id: faved.id}})
     }
 
     return (

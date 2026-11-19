@@ -27,11 +27,11 @@ export function validateFavourites(body, {partial = false} = {}) {
 
     // Make sure it has an id from the AIC
     if (!partial) {
-        const instituteId = body.id;
-        if (!instituteId) {
-            errors.id = 'The artwork\'s Institute ID must exist.';
+        const instituteID = body.instituteID;
+        if (!instituteID) {
+            errors.instituteID = 'The artwork\'s Institute ID must exist.';
         } else {
-            values.id = instituteId;
+            values.instituteID = instituteID;
         }
     }
 
@@ -62,7 +62,7 @@ export function validateFavourites(body, {partial = false} = {}) {
         errors.body = 'Pass at least one field to change.';
     }
 
-    console.log(values)
+   
     return {values, errors};
 }
 

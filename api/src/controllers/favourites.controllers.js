@@ -1,14 +1,13 @@
 // TODO: control favourites (?)
 
-import { createFavourite, findFavourites, findFavouriteById, updateFavourites, deleteFavourite } from "../data/favourites.js";
 import { HttpError } from "../utils/http-error.js";
 import { Favourite } from "../models/Favourite.js";
-import { User } from "../models/User.js";
 
-export function createFavouriteController (req, res) {
-    const favourite = createFavourite(req.body);
 
-    res.location(`/api/favourites/${favourite.favouritesId}`)
+export async function createFavouriteController (req, res) {
+    const favourite = await Favourite.create(req.body);
+
+    res.location(`/api/favourites/${favourite.id}`)
     .status(201)
     .json({ data : favourite});
 }
@@ -31,8 +30,14 @@ export async function getFavouriteById(req, res) {
     res.json({ data: favourite });
 }
 
-export function updateFavouriteController (req, res) {
-    const favourite = updateFavourites(req.params.id, req.body);
+export async function updateFavouriteController (req, res) {
+    const favourite = await Favourite.findByIdAndUpdate(req.params.id, req.body,
+        {
+            new: true,
+            runValidators: true,
+        }
+    ).populate("userId");
+    
 
     if (!favourite) {
         throw new HttpError(404, "Favourite not found.");
@@ -40,8 +45,8 @@ export function updateFavouriteController (req, res) {
     res.json({ data: favourite});
 }
 
-export function deleteFavouriteController(req, res) {
-    const deleted = deleteFavourite(req.params.id);
+export async function deleteFavouriteController(req, res) {
+    const deleted = await Favourite.findByIdAndDelete(req.params.id);
 
     if (!deleted) {
         throw new HttpError(404, "Favourite not found.");

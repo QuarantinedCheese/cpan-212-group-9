@@ -4,7 +4,7 @@ if (!API_ORIGIN) {
 }
 
 // Replace with proper USER_ID when authetication is implemented
-const USER_ID = "3569a16d-e3a7-43b0-9282-8cd99ab82683";
+const USER_ID = "6afe2b0592ae78000465c2d6";
 
 // PATCH a favourite item
 export async function patchFavouriteNotes({params}) {
@@ -34,7 +34,7 @@ export async function VerifyFavourite(artwork) {
 
     const savedFavourite = result.data.find(
         (item) =>
-            item.id === artwork.id && item.userId === USER_ID
+            item.instituteID === artwork.id && item.userId?.id === USER_ID
     );
 
     return savedFavourite;

@@ -5,6 +5,7 @@ import { validateFavourites as checkFavourites } from "../validators/favourite.j
 
 export function validateFavourites({ partial = false } = {}) {
     return (req, res, next) => {
+        
         const {values, errors} = checkFavourites(req.body, { partial });
         if (Object.keys(errors).length > 0) {
             throw new HttpError(400, 'Validation failed', errors);

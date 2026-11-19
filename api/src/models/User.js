@@ -17,7 +17,10 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: [true, 'Email is required'],
             trim: true,
-            validate: {validator: v => /^\S+@\S+\.\S+$/.test(v), message: 'Invalid address'},
+            validate: {
+                validator: v => /^\S+@\S+\.\S+$/.test(v),
+                message: 'Invalid address',   
+        },
         }
     },
     {
