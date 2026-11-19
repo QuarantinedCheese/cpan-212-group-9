@@ -62,3 +62,15 @@
 *Autumn Gun-Munro*
 - Added image url mapping
 - Added searchArtworks route controller
+
+# M4. MongoDB Persistence
+
+*Kristine May Garcia*
+- Implemented relationships between User and Favourite models using Mongoose and populate.
+- Updated CRUD according to Mongoose
+- Mongoose validation errors
+- Checked validation errors for forms, ids, nonexisting documents
+- Implemented filtering, sorting, and pagination for the Favourite API endpoint
+- Added case-insensitive title search
+- Implemented pagination with page and limit, with a maximum of 50
+- Tested page and limit error validation
