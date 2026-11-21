@@ -2,8 +2,11 @@
 import { HttpError } from '../utils/http-error.js';
 import { User } from "../models/User.js";
 
-// req is the user request, res is the response we are building with each function
+function escapeRegex(text) {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
 
+// req is the user request, res is the response we are building with each function
 export async function listUsers(req, res) {
     const {username, q} = req.query
     // Shouldn't have to verify that username exists, but for artworks/favourites,
@@ -15,13 +18,15 @@ export async function listUsers(req, res) {
         throw new HttpError(400, 'invalid query', {q: 'Send q only once'});
     }
 
+    // Filter declares what is wanted, empty {} means all of them.
     const filter = {};
 
     if (username) {
         filter.username = username;
     }
     if (q) {
-        filter.username = { $regex: q, $options: 'i'};
+        // i flag ignores upper and lowercase.
+        filter.username = new RegExp(escapeRegex(q), 'i');
     }
 
     const users = await User.find(filter);

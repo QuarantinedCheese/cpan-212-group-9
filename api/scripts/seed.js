@@ -36,7 +36,6 @@ const deleted = await User.deleteMany({});
 // insertMany() also checks schema rules, any typos above will not create issues.
 const inserted = await User.insertMany(sampleUsers);
 
-await Favourite.deleteMany({});
 
 const sampleFavourites = [
     {
@@ -62,11 +61,13 @@ const sampleFavourites = [
     },
 ];
 
+
+const deletedFavourites = await Favourite.deleteMany({});
 const insertedFavourites = await Favourite.insertMany(sampleFavourites);
 
 // TODO: HANDLE ARTWORKS (?)
 
-console.log(`Removed ${deleted.deletedCount} users, inserted ${inserted.length} users and ${insertedFavourites.length} favorites`);
+console.log(`Removed ${deleted.deletedCount} users, ${deletedFavourites.deletedCount} favourites, inserted ${inserted.length} users and ${insertedFavourites.length} favorites`);
 
 // Close connection
 await mongoose.disconnect();
