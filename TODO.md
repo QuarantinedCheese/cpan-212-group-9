@@ -22,18 +22,7 @@ Non-milestone specific items, anything that isn't really required, but should be
 ## M4
 Initialised based on the M4 checklist [in the docs](https://docs.dorzairi.com/docs/3dbba291-e3c7-4289-a0a6-a3d2d19fb881/).
 
-* Models replace in-memory data.
-  * Every M2 endpoint now reads and writes MongoDB, and no in-memory arrays are left for these resources (the external API cache can stay in memory).
-  * Updates use `{ returnDocument: 'after', runValidators: true }`.
 
-* Validation errors.
-  * Mongoose validation errors get a 400 in your error shape with field details, never a 500.
-  * A badly formed id and a document that doesn't exist both get a 404.
-  * The M3 forms show these field errors on the page.
-* Filter, sort and paginate.
-  * One list endpoint accepts query parameters for at least one filter, a sort (only fields on your allowlist; any other sort field gets a 400) and pagination (`page` and `limit`, with a maximum `limit`).
-  * It returns the items together with the total count and the number of pages.
-  * If you search text with a regular expression, escape the user's input first.
 * List page controls.
   * The matching list page in `web/` has controls for the filter, the sort and moving between pages.
   * They update the URL query string, so reloading the page keeps the same view.
@@ -43,6 +32,7 @@ Initialised based on the M4 checklist [in the docs](https://docs.dorzairi.com/do
   * `CONTRIBUTIONS.md` has an M4 section.
 * Check that we can fetch and search for artworks externally
   * Should also verify that we can search by ID externally through the web
+* Add at least 25 documents during the seeding process
 
 ### M4 Completed
 
@@ -52,8 +42,19 @@ Initialised based on the M4 checklist [in the docs](https://docs.dorzairi.com/do
   * `api/.env.example` lists `MONGODB_URI` with a fake value.
 * Models replace in-memory data.
   * Both main resources are Mongoose 9 models with schema validation (required fields, and lengths, ranges or enums where they fit). - Ethan
-* Related models.
+* Related models. - Kristine
   * At least two models are related with a `ref`, and at least one endpoint returns the related data using `populate`.
 * Seed script. - Ethan + Kristine
   * `npm run seed` in `api/` deletes and re-creates sample data for every model, with at least 25 documents in the paginated collection.
-  * No route creates or deletes seed data.
+  * No route creates or deletes seed data.  
+* Validation errors. - Kristine
+  * Mongoose validation errors get a 400 in your error shape with field details, never a 500.
+  * A badly formed id and a document that doesn't exist both get a 404.
+  * The M3 forms show these field errors on the page.
+* Filter, sort and paginate. - Kristine
+  * One list endpoint accepts query parameters for at least one filter, a sort (only fields on your allowlist; any other sort field gets a 400) and pagination (`page` and `limit`, with a maximum `limit`).
+  * It returns the items together with the total count and the number of pages.
+  * If you search text with a regular expression, escape the user's input first.
+* Models replace in-memory data. - Kristine
+  * Every M2 endpoint now reads and writes MongoDB, and no in-memory arrays are left for these resources (the external API cache can stay in memory).
+  * Updates use `{ returnDocument: 'after', runValidators: true }`.
