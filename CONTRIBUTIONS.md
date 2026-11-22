@@ -74,3 +74,10 @@
 - Added case-insensitive title search
 - Implemented pagination with page and limit, with a maximum of 50
 - Tested page and limit error validation
+- Initiated seed script for favourites
+
+*Ethan Pothier*
+* Added MongoDB connection
+* Ensured API stops with a message when `MONGODB_URI` is missing
+* Added schema validation with models
+* Initiated Seed script for users, adjusted seed script for favourites
