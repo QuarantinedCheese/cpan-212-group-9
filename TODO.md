@@ -22,14 +22,9 @@ Non-milestone specific items, anything that isn't really required, but should be
 ## M4
 Initialised based on the M4 checklist [in the docs](https://docs.dorzairi.com/docs/3dbba291-e3c7-4289-a0a6-a3d2d19fb881/).
 
-
 * List page controls.
   * The matching list page in `web/` has controls for the filter, the sort and moving between pages.
   * They update the URL query string, so reloading the page keeps the same view.
-* `README` - Ethan
-  * The `README` says how to set `MONGODB_URI`, how to run the seed, and which query parameters the list endpoint accepts.
-* `CONTRIBUTIONS.md`
-  * `CONTRIBUTIONS.md` has an M4 section.
 * Check that we can fetch and search for artworks externally
   * Should also verify that we can search by ID externally through the web
 * Add at least 25 documents during the seeding process
@@ -58,3 +53,7 @@ Initialised based on the M4 checklist [in the docs](https://docs.dorzairi.com/do
 * Models replace in-memory data. - Kristine
   * Every M2 endpoint now reads and writes MongoDB, and no in-memory arrays are left for these resources (the external API cache can stay in memory).
   * Updates use `{ returnDocument: 'after', runValidators: true }`.
+* `README` - Ethan
+  * The `README` says how to set `MONGODB_URI`, how to run the seed, and which query parameters the list endpoint accepts.
+* `CONTRIBUTIONS.md`
+  * `CONTRIBUTIONS.md` has an M4 section.
