@@ -22,10 +22,10 @@ Non-milestone specific items, anything that isn't really required, but should be
 ## M4
 Initialised based on the M4 checklist [in the docs](https://docs.dorzairi.com/docs/3dbba291-e3c7-4289-a0a6-a3d2d19fb881/).
 
-* List page controls.
+* List page controls. - Ethan
   * The matching list page in `web/` has controls for the filter, the sort and moving between pages.
   * They update the URL query string, so reloading the page keeps the same view.
-* Check that we can fetch and search for artworks externally
+* Check that we can fetch and search for artworks externally - Ethan
   * Should also verify that we can search by ID externally through the web
 * Add at least 25 documents during the seeding process
 
