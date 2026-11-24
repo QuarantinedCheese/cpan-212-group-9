@@ -50,3 +50,21 @@ export async function VerifyFavourite(artwork) {
 
     return savedFavourite;
 }
+
+// Returns all of a user's favourites
+export async function getUserFavourites() {
+    const user = await getFallback();
+    const res = await fetch(API_ORIGIN + "/api/favourites");
+
+    if (!res.ok) {
+        throw new Error("Could not load favourites.");
+    }
+    const result = await res.json();
+
+    const savedFavourites = result.data.filter(
+        (item) =>
+            item.userId?.id === user._id
+    );
+
+    return savedFavourites;
+}
