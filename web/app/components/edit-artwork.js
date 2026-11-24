@@ -31,7 +31,7 @@ export default function ArtworkEdit({artwork, handleSave}) {
             }}
         >Save</button>
         <p>{charsLeft}</p>
-        <p>{saved ? "Saved!" : "Changes not Saved!"}</p>
+        <p>{saved ? "Changes saved!" : "Changes not saved!"}</p>
         </>
     )
 }

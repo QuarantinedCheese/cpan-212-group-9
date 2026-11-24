@@ -2,34 +2,34 @@ import { HttpError } from '../utils/http-error.js';
 
 const artworks = [
     {
-        id: 'b2c3d4e5-f6a7-8901-bcde-f12345678901',
+        id: '24645',
         title: 'The Great Wave off Kanagawa',
         altTitles: [],
         date: '1831',
         artist: 'Hokusai',
         creationLocation: 'Japan',
         shortDescription: 'Woodblock print showing massive waves framing Mount Fuji.',
-        imageUrl: null
+        imageUrl: 'https://www.artic.edu/iiif/2/b3974542-b9b4-7568-fc4b-966738f61d78/full/843,/0/default.jpg'
     },
     {
-        id: 'c3d4e5f6-a789-01bc-def1-234567890123',
-        title: 'The Starry Night',
-        altTitles: ['Starry Night'],
-        date: '1889',
-        artist: 'Vincent van Gogh',
-        creationLocation: 'Saint-Rémy-de-Provence, France',
-        shortDescription: 'Post-impressionistic oil painting depicting a swirling night sky over a Dutch village.',
-        imageUrl: null
+        id: '129884',
+        title: 'Starry Night and the Astronauts',
+        altTitles: [],
+        date: '1972',
+        artist: 'Alma Thomas\nAmerican, 1891–1978',
+        creationLocation: 'United States',
+        shortDescription: 'Abstract painting composed of small vertical dabs of multiple shades of blue with a small area of similar strokes of red, orange, and yellow in the upper right.',
+        imageUrl: 'https://www.artic.edu/iiif/2/e966799b-97ee-1cc6-bd2f-a94b4b8bb8f9/full/843,/0/default.jpg'
     },
     {
-        id: 'd4e5f6a7-8901-bcde-f123-456789012345',
+        id: '17229',
         title: 'The Scream',
         altTitles: ['Der Schrei der Natur'],
         date: '1893',
         artist: 'Edvard Munch',
         creationLocation: 'Norway',
         shortDescription: 'Iconic expressionist painting depicting a figure with an agonized expression against a fiery sky.',
-        imageUrl: null
+        imageUrl: 'https://www.artic.edu/iiif/2/3b374643-5328-3e00-c02b-5ab56e5ae8f8/full/843,/0/default.jpg'
     }
 ];
 

@@ -35,7 +35,7 @@ await connectDb();
 const deleted = await User.deleteMany({});
 // insertMany() also checks schema rules, any typos above will not create issues.
 const inserted = await User.insertMany(sampleUsers);
-
+export const fallBackUser = inserted[0];
 
 const sampleFavourites = [
     {

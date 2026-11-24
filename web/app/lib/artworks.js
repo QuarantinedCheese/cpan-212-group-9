@@ -1,5 +1,5 @@
 // Get the API
-let API_ORIGIN = process.env.API_URL;
+let API_ORIGIN = process.env.API_ORIGIN;
 if (!API_ORIGIN) {
     API_ORIGIN = 'http://localhost:4000';
 }

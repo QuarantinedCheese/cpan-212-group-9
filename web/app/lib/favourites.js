@@ -4,7 +4,17 @@ if (!API_ORIGIN) {
 }
 
 // Replace with proper USER_ID when authetication is implemented
-const USER_ID = "6afe2b0592ae78000465c2d6";
+async function getFallback() {
+    const res = await fetch(API_ORIGIN + "/api/test");
+
+    if (!res.ok) {
+        throw new Error('Could not find fallback user. Is the database seeded correctly?');
+    }
+
+    const body = await res.json();
+    return body.data
+}
+    
 
 // PATCH a favourite item
 export async function patchFavouriteNotes({params}) {
@@ -25,6 +35,7 @@ export async function patchFavouriteNotes({params}) {
 }
 
 export async function VerifyFavourite(artwork) {
+    const user = await getFallback();
     const res = await fetch(API_ORIGIN + "/api/favourites");
 
     if (!res.ok) {
@@ -34,7 +45,7 @@ export async function VerifyFavourite(artwork) {
 
     const savedFavourite = result.data.find(
         (item) =>
-            item.instituteID === artwork.id && item.userId?.id === USER_ID
+            item.instituteID === artwork.id && item.userId?.id === user._id
     );
 
     return savedFavourite;

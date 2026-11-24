@@ -2,10 +2,12 @@
 
 import { HttpError } from "../utils/http-error.js";
 import { Favourite } from "../models/Favourite.js";
-
+import { getFallback } from "../utils/fallbackUser.js";
+import mongoose from "mongoose";
 
 export async function createFavouriteController (req, res) {
-    const favourite = await Favourite.create(req.body);
+    const devTestUser = await getFallback();
+    const favourite = await Favourite.create({...req.body, userId: devTestUser._id});
 
     res.location(`/api/favourites/${favourite.id}`)
     .status(201)

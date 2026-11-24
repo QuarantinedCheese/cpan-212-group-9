@@ -1,6 +1,6 @@
 // TODO: Routing for the users
 import { Router } from 'express';
-import { createUser, deleteUser, listUsers, getUser, updateUser } from '../controllers/users.controllers.js';
+import { createUser, deleteUser, listUsers, getUser, updateUser, getSingleUser } from '../controllers/users.controllers.js';
 import { validateUser } from '../middleware/validate-user.js';
 
 // Paths are relative to where the router is mounted in app.js
@@ -14,3 +14,5 @@ usersRouter.get('/:id', getUser); // eg. curl.exe -X GET http://localhost:4000/a
 usersRouter.post('/', validateUser(), createUser);
 usersRouter.patch('/:id', validateUser({ partial: true }), updateUser); // curl.exe -X PATCH http://localhost:4000/api/users/3569a16d-e3a7-43b0-9282-8cd99ab82683 ^ -H "Content-Type: application/json" ^ -d "{\`"username\`": \`"testing123\`"}"
 usersRouter.delete('/:id', deleteUser);
+
+usersRouter.get('/get', getSingleUser);

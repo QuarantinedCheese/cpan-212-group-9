@@ -1,6 +1,8 @@
 
 import { HttpError } from '../utils/http-error.js';
 import { User } from "../models/User.js";
+import { Favourite } from '../models/Favourite.js';
+import { getFallback } from '../utils/fallbackUser.js';
 
 function escapeRegex(text) {
   return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -70,3 +72,15 @@ export async function deleteUser(req, res) {
     }
     res.status(204).end();
 }
+
+// DEV TESTING
+// Gets a single user from the seed data.
+export async function getSingleUser(req, res) {
+    const user = await getFallback();
+
+    if (!user) {
+        throw new HttpError(404, 'testusername1 not found, run the user seed first.');
+    }
+
+    res.json({data: user});
+};

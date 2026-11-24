@@ -11,6 +11,9 @@ import { favouritesRouter } from './routes/favourites.routes.js';
 import { artworkRouter } from './routes/artworks.routes.js';
 import { usersRouter } from './routes/users.routes.js';
 
+import { testRouter } from './routes/test.routes.js';
+import test from 'node:test';
+
 export const app = express();
 
 // Express runs routes top to bottom, order matters
@@ -33,6 +36,7 @@ app.get('/api/health', (req, res) => {
 app.use('/api/users', usersRouter);
 app.use('/api/favourites', favouritesRouter);
 app.use('/api/artwork', artworkRouter);
+app.use('/api/test', testRouter);
 
 
 // Must stay last
