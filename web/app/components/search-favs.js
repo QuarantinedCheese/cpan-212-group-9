@@ -84,7 +84,7 @@ export default function FavouritesSearch() {
 
     const handleSearch = async (newSearch) => {
         setSearchBy(newSearch);
-        console.log(newSearch)
+        console.log(newSearch);
     }
 
     return (
