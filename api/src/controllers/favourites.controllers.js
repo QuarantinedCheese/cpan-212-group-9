@@ -40,6 +40,7 @@ export async function findFavouritesController (req, res) {
         });
     }
     
+    const { userId } = req.query;
     const { search } = req.query;
     const { sort } = req.query;
 
@@ -58,8 +59,11 @@ export async function findFavouritesController (req, res) {
 
     if (search) {
         filter.title = new RegExp(escapeRegex(search), 'i');
-        
     }
+    if (userId) {
+        filter.userId = userId
+    }
+
     const total = await Favourite.countDocuments(filter);
 
     const sortOptions = {};

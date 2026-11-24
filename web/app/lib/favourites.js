@@ -52,19 +52,18 @@ export async function VerifyFavourite(artwork) {
 }
 
 // Returns all of a user's favourites
-export async function getUserFavourites() {
+export async function getUserFavourites(params = {}) {
     const user = await getFallback();
-    const res = await fetch(API_ORIGIN + "/api/favourites");
+    
+    const base = `/api/favourites?userId=${user._id}`;
+    const search = params.search ? `&search=${params.search}` : '';
+
+    const res = await fetch(API_ORIGIN + base + search);
 
     if (!res.ok) {
         throw new Error("Could not load favourites.");
     }
     const result = await res.json();
 
-    const savedFavourites = result.data.filter(
-        (item) =>
-            item.userId?.id === user._id
-    );
-
-    return savedFavourites;
+    return result.data;
 }
