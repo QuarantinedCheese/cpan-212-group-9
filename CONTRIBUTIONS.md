@@ -81,3 +81,4 @@
 * Ensured API stops with a message when `MONGODB_URI` is missing
 * Added schema validation with models
 * Initiated Seed script for users, adjusted seed script for favourites
+* Refactored web code to work with MongoDB
