@@ -2,6 +2,7 @@ import PageHeader from "@/app/components/header";
 import Link from "next/link";
 import { Suspense } from "react";
 import { getArtworks } from "@/app/lib/artworks";
+import Image from "next/image";
 
 
 export const metadata={
@@ -29,6 +30,11 @@ async function ArtworksList() {
         <ul>
             {artworks.map((artwork) => (
                 <li key={artwork.id}>
+                    {/* <img
+                        src={artwork.imageUrl}
+                        alt={artwork.imageUrl}
+                        referrerPolicy="no-referrer"
+                    /> */}
                     <h2>
                     <Link href={`/artworks/${artwork.id}`}>
                         {artwork.title}
