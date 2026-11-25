@@ -60,7 +60,8 @@ export default function FavouritesSearch() {
         artist: false,
         createdAt: false,
     };
-    const [sort, setSort] = useState(defaultSort)
+    const [sort, setSort] = useState(defaultSort);
+    const [descending, setDescending] = useState(false);
 
     useEffect( () => {
         async function loadFavs() {
@@ -74,6 +75,9 @@ export default function FavouritesSearch() {
                 sorted = 'title';
             } else if (sort.createdAt) {
                 sorted = 'createdAt';
+            }
+            if (sorted && descending) {
+                sorted = '-' + sorted;
             }
 
             try {
@@ -91,7 +95,7 @@ export default function FavouritesSearch() {
         };
 
         loadFavs();
-    }, [searchBy, sort.artist, sort.title, sort.createdAt]);
+    }, [searchBy, sort.artist, sort.title, sort.createdAt, descending]);
     
     
     const handleChange = (e) => {
@@ -121,6 +125,13 @@ export default function FavouritesSearch() {
             onChange={handleChange}
         />
 
+        <button
+            onClick={() => {
+                handleSearch(search);
+            }}
+        >Search</button>
+
+
         <p>Sorting Options:</p>
         <label htmlFor="title">
             <input
@@ -143,12 +154,13 @@ export default function FavouritesSearch() {
                 checked={sort.createdAt}
                 onChange={(e) => handleSortChange(e, 'createdAt')}
             /> Fave date </label>
-        
+
         <button
             onClick={() => {
-                handleSearch(search);
+                setDescending(!descending);
             }}
-        >Search</button>
+        >{descending ? 'Descending' : 'Ascending'}</button>
+        
 
         <Suspense fallback={<p>Loading artworks...</p>}>
             {favourites ? <ArtworksList favourites={favourites}/> : <p>No favourites available.</p>}

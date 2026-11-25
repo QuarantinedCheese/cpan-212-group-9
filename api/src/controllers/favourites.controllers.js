@@ -75,7 +75,8 @@ export async function findFavouritesController (req, res) {
     const favourites = await Favourite.find(filter)
         .populate('userId')
         .skip((page - 1) * limit)
-        .limit(limit);
+        .limit(limit)
+        .sort(sortOptions);
 
     res.json({ data: favourites, total, pages: Math.ceil(total / limit), });
 }
