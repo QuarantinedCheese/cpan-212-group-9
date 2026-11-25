@@ -22,10 +22,7 @@ Non-milestone specific items, anything that isn't really required, but should be
 ## M4
 Initialised based on the M4 checklist [in the docs](https://docs.dorzairi.com/docs/3dbba291-e3c7-4289-a0a6-a3d2d19fb881/).
 
-* List page controls. - Ethan
-  * The matching list page in `web/` has controls for the filter, the sort and moving between pages.
-  * They update the URL query string, so reloading the page keeps the same view.
-* Add at least 25 documents during the seeding process
+
 
 ### M4 Completed
 
@@ -55,3 +52,6 @@ Initialised based on the M4 checklist [in the docs](https://docs.dorzairi.com/do
   * The `README` says how to set `MONGODB_URI`, how to run the seed, and which query parameters the list endpoint accepts.
 * `CONTRIBUTIONS.md`
   * `CONTRIBUTIONS.md` has an M4 section.
+* List page controls. - Ethan
+  * The matching list page in `web/` has controls for the filter, the sort and moving between pages.
+  * They update the URL query string, so reloading the page keeps the same view.
