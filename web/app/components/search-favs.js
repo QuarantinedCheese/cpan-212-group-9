@@ -54,13 +54,31 @@ export default function FavouritesSearch() {
     const [searchBy, setSearchBy] = useState(search);
     const [favourites, setFavourites] = useState(null);
     const [message, setMessage] = useState('');
+    
+    const defaultSort = {
+        title: false,
+        artist: false,
+        createdAt: false,
+    };
+    const [sort, setSort] = useState(defaultSort)
 
     useEffect( () => {
         async function loadFavs() {
             setMessage('');
 
+            // Define sorted
+            let sorted;
+            if (sort.artist) {
+                sorted = 'artist';
+            } else if (sort.title) {
+                sorted = 'title';
+            } else if (sort.createdAt) {
+                sorted = 'createdAt';
+            }
+
             try {
-                const loadedFavourites = await getUserFavourites({search: searchBy});
+                // Load favourites
+                const loadedFavourites = await getUserFavourites({search: searchBy, sort: sorted});
 
                 if (loadedFavourites.length > 0) {
                     setFavourites(loadedFavourites);
@@ -73,18 +91,27 @@ export default function FavouritesSearch() {
         };
 
         loadFavs();
-    }, [searchBy]);
+    }, [searchBy, sort.artist, sort.title, sort.createdAt]);
     
     
     const handleChange = (e) => {
         const n = e.target;
         setSearch(n.value);
     }
-    
-
     const handleSearch = async (newSearch) => {
         setSearchBy(newSearch);
-        console.log(newSearch);
+    }
+
+
+    const handleSortChange = (e, key) => {
+        const value = e.target.checked;
+        if (key == 'title') {
+            setSort({...defaultSort, title: value});
+        } else if (key == 'artist') {
+            setSort({...defaultSort, artist: value});
+        } else if (key == 'createdAt') {
+            setSort({...defaultSort, createdAt: value});
+        }
     }
 
     return (
@@ -93,11 +120,36 @@ export default function FavouritesSearch() {
             value={search}
             onChange={handleChange}
         />
+
+        <p>Sorting Options:</p>
+        <label htmlFor="title">
+            <input
+                id="title"
+                type='checkbox'
+                checked={sort.title}
+                onChange={(e) => handleSortChange(e, 'title')}
+            /> Title </label>
+        <label htmlFor="artist">
+            <input
+                id="artist"
+                type='checkbox'
+                checked={sort.artist}
+                onChange={(e) => handleSortChange(e, 'artist')}
+            /> Artist </label>
+        <label htmlFor="createdAt">
+            <input
+                id="createdAt"
+                type='checkbox'
+                checked={sort.createdAt}
+                onChange={(e) => handleSortChange(e, 'createdAt')}
+            /> Fave date </label>
+        
         <button
             onClick={() => {
                 handleSearch(search);
             }}
         >Search</button>
+
         <Suspense fallback={<p>Loading artworks...</p>}>
             {favourites ? <ArtworksList favourites={favourites}/> : <p>No favourites available.</p>}
         </Suspense>

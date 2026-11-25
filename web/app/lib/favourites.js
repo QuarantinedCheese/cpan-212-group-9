@@ -57,8 +57,9 @@ export async function getUserFavourites(params = {}) {
     
     const base = `/api/favourites?userId=${user._id}`;
     const search = params.search ? `&search=${params.search}` : '';
+    const sort = params.sort ? `&sort=${params.sort}` : '';
 
-    const res = await fetch(API_ORIGIN + base + search);
+    const res = await fetch(API_ORIGIN + base + search + sort);
 
     if (!res.ok) {
         throw new Error("Could not load favourites.");
