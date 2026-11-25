@@ -18,7 +18,9 @@ By default, the API port is `4000`. The web API `API_ORIGIN` is `http://localhos
 ## 2. MongoDB setup
 If you have access to both our database username, and our password, then, in `/api`, replace `<db_username>` with the username, and `<db_password>` with the password. 
 
-If you do not have access to our database, you can create your own database collection and replace the full URI in the `.env` with your own. 
+If you do not have access to our database, you can create your own database collection and replace the full URI in the `.env` with your own.
+
+If using another database, run `npm run seed` to fill out data.
 
 ## 3. Run Servers
 Navigate to the respective /api or /web for each. 
