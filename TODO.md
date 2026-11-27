@@ -19,39 +19,42 @@ Non-milestone specific items, anything that isn't really required, but should be
   * Notes Editing Page
 * 
 
-## M4
-Initialised based on the M4 checklist [in the docs](https://docs.dorzairi.com/docs/3dbba291-e3c7-4289-a0a6-a3d2d19fb881/).
+## M5
+Initialised based on the M5 checklist [in the docs](https://docs.dorzairi.com/docs/3dbba291-e3c7-4289-a0a6-a3d2d19fb881/).
 
-
-
-### M4 Completed
-
-* Connection. - Ethan
-  * The API runs `await mongoose.connect(process.env.MONGODB_URI)` before `app.listen`, stops with a clear message if `MONGODB_URI` is missing
-  * Sets `mongoose.set('sanitizeFilter', true)`.
-  * `api/.env.example` lists `MONGODB_URI` with a fake value.
-* Models replace in-memory data.
-  * Both main resources are Mongoose 9 models with schema validation (required fields, and lengths, ranges or enums where they fit). - Ethan
-* Related models. - Kristine
-  * At least two models are related with a `ref`, and at least one endpoint returns the related data using `populate`.
-* Seed script. - Ethan + Kristine
-  * `npm run seed` in `api/` deletes and re-creates sample data for every model, with at least 25 documents in the paginated collection.
-  * No route creates or deletes seed data.  
-* Validation errors. - Kristine
-  * Mongoose validation errors get a 400 in your error shape with field details, never a 500.
-  * A badly formed id and a document that doesn't exist both get a 404.
-  * The M3 forms show these field errors on the page.
-* Filter, sort and paginate. - Kristine
-  * One list endpoint accepts query parameters for at least one filter, a sort (only fields on your allowlist; any other sort field gets a 400) and pagination (`page` and `limit`, with a maximum `limit`).
-  * It returns the items together with the total count and the number of pages.
-  * If you search text with a regular expression, escape the user's input first.
-* Models replace in-memory data. - Kristine
-  * Every M2 endpoint now reads and writes MongoDB, and no in-memory arrays are left for these resources (the external API cache can stay in memory).
-  * Updates use `{ returnDocument: 'after', runValidators: true }`.
-* `README` - Ethan
-  * The `README` says how to set `MONGODB_URI`, how to run the seed, and which query parameters the list endpoint accepts.
-* `CONTRIBUTIONS.md`
-  * `CONTRIBUTIONS.md` has an M4 section.
-* List page controls. - Ethan
-  * The matching list page in `web/` has controls for the filter, the sort and moving between pages.
-  * They update the URL query string, so reloading the page keeps the same view.
+* Users and passwords.
+ * A User model with a unique email and a password hashed with bcryptjs.
+ * Passwords are at least 8 characters and at most 72 bytes. The password hash is never included in any response.
+* Auth endpoints.
+ * `POST /api/auth/register`
+ * `POST /api/auth/login`
+ * `POST /api/auth/logout`
+ * GET `/api/auth/me`, which returns the signed-in user or a 401.
+ * A wrong email and a wrong password get the same 401 message.
+* Sessions.
+ * express-session with connect-mongo.
+ * The cookie is `httpOnly`, `sameSite: 'lax'`, and `secure` in production.
+ * The session is regenerated on register and login.
+ * The server refuses to start if SESSION_SECRET is missing.
+ * If your group uses JWT instead: tokens are signed with `jose`, have an expiry, are stored in an `httpOnly` cookie (never `localStorage`), and the server refuses to start if `JWT_SECRET` is missing.
+* Protected API routes.
+ * Every route that creates, updates or deletes data needs a signed-in user and returns 401 without one.
+* Ownership or roles
+ * Each item records the user who created it.
+ * Only that user (or an admin, if your app has an admin role) can update or delete it; anyone else gets a 403.
+* Frontend auth.
+ * Register and login pages that show the API's error messages, a logout button, and a header that shows whether you're signed in.
+ * Pages that need a signed-in user (at least create and edit) send you to the login page when you're signed out.
+ * Edit and delete buttons only appear on items you're allowed to change.
+* `helmet()` is applied to the Express app.
+* Rate limiting.
+ * express-rate-limit (using limit, not max) on the register and login routes, returning 429 when the limit is hit.
+* No secrets in the repo.
+ * No passwords, connection strings, API keys or session secrets anywhere in the repo or its commit history.
+ * Both .env.example files list every variable with fake values.
+ * If a real secret was ever committed, you changed it (new Atlas password, new key) and the README says so in one line.
+* curl tests, README.
+ * The Testing section in api/README.md adds the auth requests, one that gets a 401 and one that gets a 403.
+ * They use a cookie jar (-c jar.txt -b jar.txt) and run top to bottom after npm run seed.
+ * n Windows, run these in Git Bash. The README lists the new environment variables.
+* CONTRIBUTIONS.md has an M5 section.
